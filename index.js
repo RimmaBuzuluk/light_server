@@ -52,9 +52,9 @@ app.post('/auth/register', registerValidator, UserControllers.register)
 app.get('/auth/me', checkAuth, UserControllers.getMe)
 
 app.post('/address',checkAuth, addressCreateValidation, AddressController.create)
-// app.get('/address', checkAuth, AddressController.getAll)
-// app.get('/address/:id', checkAuth, AddressController.getOne)
-// app.delete('/address', checkAuth, AddressController.remove)
+app.get('/address',checkAuth, AddressController.getAll)
+app.get('/address/:id', AddressController.getOne)
+app.delete('/address/:id', checkAuth, AddressController.remove)
 // app.patch('/address', checkAuth, AddressController.update)
 app.listen(2000, (err)=>{
     if(err){
