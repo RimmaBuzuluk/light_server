@@ -18,6 +18,4 @@ export default (req,res,next)=>{
             message:'немає доступу'
         })
     }
-
-    res.send(token)
 }
