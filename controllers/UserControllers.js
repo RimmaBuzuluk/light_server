@@ -88,8 +88,7 @@ export const register= async(req,res)=>{
 
 export const getMe=async(req, res) =>{
     try{
-        console.log(req.userId)
-        const user=await User.findById(req.userId)
+        const user=await UserModel.findById(req.userId)
         if(!user){
             return res.status(404).json({
                 message:'Користувача не знайдено'
@@ -98,8 +97,7 @@ export const getMe=async(req, res) =>{
 
         const {passwordHash, ...userData}=user._doc
         res.json({
-            ...userData,
-            token
+            ...userData
         })
     }catch(err){
         console.log(err)

@@ -2,11 +2,12 @@ import express from 'express'
 import mongoose from 'mongoose';
 import * as UserControllers from './controllers/UserControllers.js'
 import * as AddressController from './controllers/AddressController.js'
+import { loadCitiesFromJSON } from './controllers/CityController.js';
 import {addressCreateValidation, loginValidation, registerValidator} from './validation.js'
-import checkAuth from './utils/checkAuth.js'
-import User from './models/User.js';
+import checkAuth from './utils/checkAuth.js';
 import Address from './models/Address.js';
 import ping from 'ping'
+import cors from 'cors'
 
 mongoose.connect(
     'mongodb+srv://auth:18102000@cluster0.g2sluk8.mongodb.net/address?retryWrites=true&w=majority'
@@ -14,9 +15,11 @@ mongoose.connect(
     console.log("DB ok")
 }).catch((err)=>console.log("DB ERR", err))
 
+
 const app =express();
 
 app.use(express.json())
+app.use(cors())
 
 /////
 app.get('/checkLight', async(req,res)=>{
@@ -46,6 +49,9 @@ app.get('/checkLight', async(req,res)=>{
     }
 })
 ////
+
+// Маршрут для завантаження міст з JSON-файлу до бази даних
+app.post('/load-cities', loadCitiesFromJSON);
 
 app.post('/auth/login',loginValidation, UserControllers.login)
 app.post('/auth/register', registerValidator, UserControllers.register)
