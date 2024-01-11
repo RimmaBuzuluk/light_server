@@ -2,7 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose';
 import * as UserControllers from './controllers/UserControllers.js'
 import * as AddressController from './controllers/AddressController.js'
-import { loadCitiesFromJSON } from './controllers/CityController.js';
+import { loadCitiesFromJSON, getAllCities} from './controllers/CityController.js';
 import {addressCreateValidation, loginValidation, registerValidator} from './validation.js'
 import checkAuth from './utils/checkAuth.js';
 import Address from './models/Address.js';
@@ -52,6 +52,7 @@ app.get('/checkLight', async(req,res)=>{
 
 // Маршрут для завантаження міст з JSON-файлу до бази даних
 app.post('/load-cities', loadCitiesFromJSON);
+app.get('/cities',getAllCities)
 
 app.post('/auth/login',loginValidation, UserControllers.login)
 app.post('/auth/register', registerValidator, UserControllers.register)

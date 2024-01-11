@@ -54,5 +54,5 @@ export const loadCitiesFromJSON = async (req, res) => {
       res.status(500).json({ error: 'Помилка завантаження даних у базу даних' });
     }
   };
-  
+``  
   
