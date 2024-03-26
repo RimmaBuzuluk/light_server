@@ -26,7 +26,7 @@ export const create = async (req, res) => {
 
 export const getAll = async (req, res) => {
 	try {
-		const region = await KharkivRegion.find();
+		const region = await KharkivRegion.find().sort({ name: 1 }).collation({ locale: 'uk' });
 		res.json(region);
 	} catch (err) {
 		console.log(err);
