@@ -40,9 +40,9 @@ app.get('/address/:id', AddressController.getOne);
 app.delete('/address/:id', checkAuth, AddressController.remove);
 // app.patch('/address', checkAuth, AddressController.update)
 
-app.post('/shedule', ScheduleController.createSchedult);
-app.get('/shedule', ScheduleController.getSchedult);
-
+app.post('/schedule', ScheduleController.createSchedult);
+app.get('/schedule', ScheduleController.getSchedult);
+app.get('/schedule/:id', ScheduleController.getOneSchedule);
 app.post('/region', RegionController.create);
 app.get('/region', RegionController.getAll);
 

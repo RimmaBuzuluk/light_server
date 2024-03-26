@@ -275,3 +275,28 @@ export const getSchedult = async (req, res) => {
 		console.log('не вдалось отримати розклад', err);
 	}
 };
+
+export const getOneSchedule = async (req, res) => {
+	try {
+		const regionId = req.params.id;
+
+		console.log(regionId);
+
+		const doc = await outageSchedule.findOne({ _id: regionId });
+
+		console.log(doc);
+
+		if (!doc) {
+			return res.status(404).json({
+				message: 'Не знайдено данного розкладу',
+			});
+		}
+
+		res.json(doc);
+	} catch (err) {
+		console.log(err);
+		res.status(404).json({
+			message: 'Не вдалось отримати розклад',
+		});
+	}
+};
