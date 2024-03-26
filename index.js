@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import * as UserControllers from './controllers/UserControllers.js';
 import * as AddressController from './controllers/AddressController.js';
 import * as ScheduleController from './controllers/ScheduleController.js';
+import * as RegionController from './controllers/KharkivRegion.js';
 import { loadCitiesFromJSON, getAllCities } from './controllers/CityController.js';
 import { addressCreateValidation, loginValidation, registerValidator } from './validation.js';
 import checkAuth from './utils/checkAuth.js';
@@ -25,15 +26,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-// app.use(
-// 	cors({
-// 		origin: 'https://light-project-client.onrender.com',
-// 	})
-// );
 
-////
-
-// Маршрут для завантаження міст з JSON-файлу до бази даних
 app.post('/load-cities', loadCitiesFromJSON);
 app.get('/cities', getAllCities);
 
@@ -48,6 +41,10 @@ app.delete('/address/:id', checkAuth, AddressController.remove);
 // app.patch('/address', checkAuth, AddressController.update)
 
 app.post('/shedule', ScheduleController.createSchedult);
+app.get('/shedule', ScheduleController.getSchedult);
+
+app.post('/region', RegionController.create);
+app.get('/region', RegionController.getAll);
 
 app.get('/chech-router-availability', async (req, res) => {
 	try {

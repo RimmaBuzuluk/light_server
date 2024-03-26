@@ -41,6 +41,10 @@ const outageScheduleSchema = new mongoose.Schema(
 			type: Number,
 			required: true,
 		},
+		persent: {
+			type: Number,
+			require: true,
+		},
 		weeks: [weekSchema], // Замінив поле на 'weeks', так як це більше відповідає вашій структурі
 	},
 	{
